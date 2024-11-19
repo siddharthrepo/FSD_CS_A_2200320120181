@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html events</title>
+</head>
+<body style="background-color: black; color:aliceblue">
+    <ul id="images">
+        <li><img width="200px" id="img1" src="images/pexels-celine-3776818-13290760.jpg" alt=""></li>
+        <li><img width="200px" id="img2" src="images/pexels-dantemunozphoto-28821836.jpg" alt=""></li>
+        <li><img width="200px" id="img3" src="images/pexels-leah-newhouse-50725-9675789.jpg" alt=""></li>
+        <li><img width="200px" id="img4" src="images/pexels-tubiderler-20003933.jpg" alt=""></li>
+        <li><a href="https://google.com" id="google">Google</a></li>
+    </ul>
+</body>
+<script>
+    // document.getElementById("img1").onclick = function(){         not a good approach
+    //     alert("img 1 clicked")
+    // }
+    
+    // type , timestamp , defaultPrevented
+    // target , toElement , srcElement, currentTarget,
+    // clientX, clientY , screenX  , screenY
+    // altkey, ctrlkey, shiftkey, keycode
+
+    document.getElementById("images").addEventListener('click' , function(e){
+        console.log('clicked inside the ul');
+    }, false)
+
+    /*
+    document.getElementById("img1").addEventListener('click' , function(e){
+        console.log('clicked on image 1');
+        e.stopPropagation()
+    }, false)
+    */
+
+    document.getElementById('google').addEventListener('click' , function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("google clicked")
+    }, false)
+    
+    document.querySelector('#images').addEventListener('click' , function(e){
+        console.log(e.target.parentNode);
+
+        if(e.target.tagName === 'IMG'){
+            let removeIt = e.target.parentNode;
+            removeIt.remove();
+        }
+    }, false)
+</script>
+</html>
